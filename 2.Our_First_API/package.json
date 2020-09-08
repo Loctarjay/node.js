@@ -1,0 +1,8 @@
+{
+  "description": "Our first API",
+  "repository": {},
+  "license": "",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
