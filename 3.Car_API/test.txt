@@ -1,0 +1,16 @@
+HTTP METHOD         PATH
+-----------         ----
+GET                 /cars           // get full car collection
+GET                 /cars/id        // get specific car
+POST                /cars           // adding 1 car
+PATCH               /cars/id        // updating 1 car
+DELETE              /cars/id        // delete 1 car
+
+
+let cars = [
+    { id: 1, name: "Ford" }
+    { id: 2, model: "Mitzubishi" }
+];
+
+// how to hande IDs?
+// The Client doesn't decide
