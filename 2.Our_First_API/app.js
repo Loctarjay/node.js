@@ -1,32 +1,28 @@
-// const express = require("express");
-
-// require object.json and console log
-//const object = require("../1._Intro/object.json");
-
-
-
-
-
 const express = require("express");
 const app = express();
-const port = 8080;
+// const app = require("express")();
 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
 app.get("/", (req, res) => {
-    return res.send();
+    return res.send("<h1>hello</h1>");
 });
 
-app.listen(port, (error) => {
-    if (error) {
-        console.log("Error starting the server");
-    }
-    console.log("Server is running on port: ", port);
+app.get("/greeting", (req, res) => {
+    return res.redirect("/");
+});
+
+app.get("/documentation", (req, res) => {
+    return res.sendFile(__dirname + "/documentation.html");
+});
+
+app.get("/documentation2", (req, res) => {
+    return res.sendFile(__dirname + "/documentation2.html");
 });
 
 app.get("/me", (req, res) => {
-    return res.send({"firstName": "Jannick", "lastName": "Lund-Pedersen"});
+    return res.send({ name: "Anders" });
 });
 
 app.get("/time", (req, res) => {
@@ -35,46 +31,49 @@ app.get("/time", (req, res) => {
     return res.send({ time });
 });
 
-
-// Implement month
 const months = {
     0: "January",
     1: "February",
     2: "March",
-    3: "April",
-    4: "",
-    5: "",
-    6: "",
-    7: "",
     8: "September"
 };
+
 app.get("/month", (req, res) => {
-    const monthNumber = new Date().getMonth();
-    return res.send({ month: months[monthNumber] });
+    const date = new Date();
+    const month = date.getMonth();
+    return res.send({ month: months[month] });
 });
 
-// Implement day
-const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const days = ["Sunday", "Monday", "Tuesday", "Wednesday",
+    "Thursday", "Friday", "Saturday"];
+
 app.get("/day", (req, res) => {
-    const dayNumber = new Date().getDay();
-    return res.send({ day: days[dayNumber]});
+    const date = new Date();
+    const day = date.getDay();
+    return res.send({ day: days[day] });
 });
 
-// Implement Query String
 app.get("/querystring", (req, res) => {
     return res.send({ query: req.query });
 });
 
-// Create a request handler on message that takes a path variable
+// create a request handler on the path message that takes a path variable
 // from the client and returns it directly to the client in the response
 
-app.get("/message/:message", (req, res) => {
+app.get("/message/:personalMessage", (req, res) => {
     return res.send({
-        message: req.params.message
+        message: req.params.personalMessage,
+        queryString: req.query
     });
 });
 
-
 app.post("/showmethebody", (req, res) => {
-    return res.send( req.body );
+    return res.send(req.body);
+});
+
+app.listen(8080, (error) => {
+    if (error) {
+        console.log("Error starting the server");
+    }
+    console.log("Server is running on port", 8080);
 });
