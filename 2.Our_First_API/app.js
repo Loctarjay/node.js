@@ -1,9 +1,11 @@
 const express = require("express");
 const app = express();
 // const app = require("express")();
+const fetch = require("node-fetch");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 
 app.get("/", (req, res) => {
     return res.send("<h1>hello</h1>");
@@ -11,6 +13,18 @@ app.get("/", (req, res) => {
 
 app.get("/greeting", (req, res) => {
     return res.redirect("/");
+});
+
+app.get("/proxy", (req, res) => {
+    fetch("http://www.google.com")
+        .then(result => result.text())
+        .then(body => {
+            return res.send(body);
+        });
+});
+
+app.get("/catfacts", (req, res) => {
+    return res.sendFile(__dirname + "/catfacts.html");
 });
 
 app.get("/documentation", (req, res) => {

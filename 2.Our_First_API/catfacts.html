@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cat Facts</title>
+</head>
+<body>
+
+    <h1>Welcome to Cat Facts</h1>
+
+    <table>
+        <tr>
+            <th>Race</th>
+            <th>Fact</th>
+        </tr>
+        <tr>
+            <td>Savannah</td>
+            <td>About same size as medium dogs</td>
+        </tr>
+        <tr>
+            <td>Egyptian Mau</td>
+            <td>Small to medium sized short-haired</td>
+        </tr>
+    </table>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+        $.get("https://cat-fact.herokuapp.com/facts", (response) => {
+            console.log(response);
+        });
+        /*
+        1. get cat facts by the way of $.ajax(()
+        2. show the cat facts in the table (JQuery)
+        3. style it
+        4. Bonus: Pagination
+         */
+
+
+        $.ajax({
+            method: "GET",
+            url: "https://cat-fact.herokuapp.com/facts",
+            dataType: "array",
+            success: function ( data ) {
+
+            }
+        })
+        .done(function ( data ) {
+
+        });
+
+
+    </script>
+
+</body>
+</html>
